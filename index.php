@@ -13,8 +13,12 @@
         }
 
         h2 {
-            font-size: medium;
+            font-size: large;
         }
+        h2 .color_letter {
+            color: red;
+            font-size: 130%;
+}
     </style>
 </head>
 
@@ -23,18 +27,23 @@
         <div class="row">
             <div class="col-12">
                 <h1>CRUD</h1>
-                <h2>Create Read Update Delete</h2>
+                <h2><span class="color_letter">C</span>reate <span class="color_letter">R</span>ead <span class="color_letter">U</span>pdate <span class="color_letter">D</span>elete</h2>
             </div>
             <div class="row">
                 <form action="crud.php" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="nom" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="" placeholder="Votre nom">
+                        <input type="text" name="nom" class="form-control" id="" placeholder="Votre nom">
                     </div>
                     <div class="mb-3">
-                        <label for="nom" class="form-label">Ville</label>
-                        <input type="text" class="form-control" id="" placeholder="Votre ville">
+                        <label for="ville" class="form-label">Ville</label>
+                        <input type="text" name="ville" class="form-control" id="" placeholder="Votre ville">
                     </div>
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">Photo :</label>
+                        <input type="file" name="photo" class="form-control" id="">
+                    </div>
+                    <button type="submit" name="save" class="btn btn-primary">CREATE</button>
 
                 </form>
             </div>
