@@ -16,6 +16,9 @@
 <body>
     <?php require_once "crud.php" ?>
 
+   
+
+    <div class="container">
     <?php if (isset($_SESSION['message'])) : ?>
         <div class="alert alert-<? $_SESSION['msg_type']; ?>" role="alert"> <!--alert boostrap. A la place d'écrire la couleur de l'alerte, je la remplace par la $_SESSION[msg_type] déclaré dans crud.php-->
             <?php
@@ -24,8 +27,6 @@
             ?>
         </div>
     <?php endif; ?>
-
-    <div class="container">
         <div class="row">
             <div class="col-12">
                 <h1>CRUD</h1>
@@ -53,7 +54,10 @@
                         <td><?php echo $row['city'] ?></td>
                         <td><img src="upload/<?php echo $row['photo']; ?>" alt="" class="img-fluid" style="width: :20%;"></td>
                         <td>
-                            <a href="crud.php?delete=<?php echo $row['id'] ?>">SUPPRIMER</a>
+                            <a href="crud.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger">SUPPRIMER</a>
+                        </td>
+                        <td>
+                            <a href="index.php?edit=<?php echo $row['id'] ?>" class="btn btn-warning">MODIFIER</a>
                         </td>
                     </tr>
                     <?php endwhile ?>
@@ -61,20 +65,26 @@
         </div>
         <div class="row">
             <form action="crud.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?php echo $id;  ?>">
                 <div class="mb-3">
                     <label for="nom" class="form-label">Nom</label>
-                    <input type="text" name="nom" class="form-control" id="" placeholder="Votre nom">
+                    <input type="text" name="nom" class="form-control" id="" placeholder="Votre nom" value="<?php echo $name;  ?>">
                 </div>
                 <div class="mb-3">
                     <label for="ville" class="form-label">Ville</label>
-                    <input type="text" name="ville" class="form-control" id="" placeholder="Votre ville">
+                    <input type="text" name="ville" class="form-control" id="" placeholder="Votre ville"  value="<?php echo $city;  ?>">
                 </div>
                 <div class="mb-3">
                     <label for="photo" class="form-label">Photo :</label>
                     <input type="file" name="photo" class="form-control" id="">
+                    <small> <?php echo $photo;?></small>
                 </div>
-                <button type="submit" name="save" class="btn btn-primary">CREATE</button>
 
+                <?php if ($update == true) : ?> 
+                    <button type="submit" name="update"  class="btn btn-primary"> UPDATE</button>
+               <?php else : ?>
+                <button type="submit" name="save" class="btn btn-primary">CREATE</button>
+                <?php endif; ?>
             </form>
         </div>
     </div>
