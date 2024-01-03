@@ -14,15 +14,18 @@ session_start();
 //connexion à la base de données
 $connect = new mysqli('localhost', 'root', '', 'cda_contact');
 
-//initialisation des variables à 0 ou vide
+//initialisation des variables à 0 ou vide. Ainsi, le formaulaire sera vide à chaque fois qu'on l'initialisera.
 $update = false;
 $name ='';
 $city = '';
 $photo = '';
 $id=0;
 
+                        ///////////////////   CRUD    ///////////////////////
+                                //  Create Read Update Delete //
+                        
 
-//créer une donnée
+//créer une donnée = CREATE
 if (isset($_POST['save'])) {
     $name = $_POST['nom'];
     $city = $_POST['ville'];
@@ -38,14 +41,18 @@ if (isset($_POST['save'])) {
         move_uploaded_file($_FILES['photo']['tmp_name'], 'upload/' . $photo);
         // echo "succes";
 
-        //je définis un clef 'message' à mon $_SESSION avec sa valeur "Données ajoutées
+        //je définis un clef 'message' à mon $_SESSION avec sa valeur "Données ajoutées 
         $_SESSION['message'] = "Données ajoutées";
         $_SESSION['msg_type'] = "success";
+
+        //redirection vers la page principale index.php après enregistrer des données en base de données
         header("location:index.php");
     }
 }
 
-//supprimer une donnée
+                            /////////////////////////////////////////////////
+
+//supprimer une donnée = DELETE
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $connect->query("DELETE FROM crud WHERE id = $id") or die($connect->error);
@@ -54,7 +61,9 @@ if (isset($_GET['delete'])) {
     header("location:index.php");
 }
 
-//modifier une donnée
+                            ///////////////////////////////////////////////////
+
+//modifier une donnée = UPDATE
 if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
     $result = $connect->query("SELECT * FROM crud WHERE id=$id") or die($connect->error);
