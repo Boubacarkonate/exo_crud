@@ -8,7 +8,7 @@ pipeline {
                     // Utilisez la commande dir pour naviguer dans le répertoire
                     dir('exo_crud') {
                         // Exécute le fichier PHP
-                        sh 'php hello.php'
+                        sh 'cat hello.php'
                     }
                 }
             }
