@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('run file') {
             steps {
-                sh 'php hello.php'
+                sh 'php exo_crud/hello.php'
             }
         }
     }
